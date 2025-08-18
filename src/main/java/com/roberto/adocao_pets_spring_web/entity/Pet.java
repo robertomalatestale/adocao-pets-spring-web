@@ -7,9 +7,10 @@ import com.roberto.adocao_pets_spring_web.exceptions.InvalidPetAgeException;
 import com.roberto.adocao_pets_spring_web.exceptions.InvalidPetWeightException;
 import com.roberto.adocao_pets_spring_web.model.Endereco;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -18,7 +19,6 @@ import lombok.Setter;
 public class Pet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Setter(AccessLevel.NONE)
     private Long id;
     private String nomeCompleto;
     @Enumerated(EnumType.STRING)
@@ -32,6 +32,19 @@ public class Pet {
     private String raca;
     private String urlFoto;
     private boolean adotado;
+
+    public Pet() {
+
+    }
+
+    public Pet(String nomeCompleto, TipoPet tipoPet, Sexo sexo, double idade, double peso, String raca){
+        setNomeCompleto(nomeCompleto);
+        setTipoPet(tipoPet);
+        setSexo(sexo);
+        setIdade(idade);
+        setPeso(peso);
+        setRaca(raca);
+    }
 
     public void setNomeCompleto(String nomeCompleto) {
         if(nomeCompleto == null || nomeCompleto.trim().isEmpty()){
@@ -88,5 +101,17 @@ public class Pet {
         this.raca = raca;
     }
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Pet pet = (Pet) o;
+        return Objects.equals(id, pet.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(id);
+    }
 
 }
