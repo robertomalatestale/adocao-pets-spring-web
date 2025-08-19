@@ -7,6 +7,7 @@ import com.roberto.adocao_pets_spring_web.exceptions.InvalidPetAgeException;
 import com.roberto.adocao_pets_spring_web.exceptions.InvalidPetWeightException;
 import com.roberto.adocao_pets_spring_web.model.Endereco;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,6 +20,7 @@ import java.util.Objects;
 public class Pet {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Setter(AccessLevel.NONE)
     private Long id;
     private String nomeCompleto;
     @Enumerated(EnumType.STRING)

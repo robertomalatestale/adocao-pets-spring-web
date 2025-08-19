@@ -12,6 +12,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
@@ -57,7 +58,7 @@ class PetControllerTest {
     @Test
     void deveBuscarPetPorId() throws Exception {
         Pet pet = new Pet("Rex da Silva", TipoPet.CACHORRO, Sexo.MACHO,15,10.50,"Lhasa Apso");
-        pet.setId(1L);
+        ReflectionTestUtils.setField(pet, "id", 1L);
 
         when(petService.buscarPetPorId(eq(1L))).thenReturn(pet);
 
@@ -79,7 +80,7 @@ class PetControllerTest {
         String jsonPet = objectMapper.writeValueAsString(pet);
 
         Pet petRetornado = new Pet("Rex da Silva", TipoPet.CACHORRO, Sexo.MACHO,15,10.50,"Lhasa Apso");
-        petRetornado.setId(1L);
+        ReflectionTestUtils.setField(pet, "id", 1L);
 
         when(petService.salvarPet(any(Pet.class))).thenReturn(petRetornado);
 
