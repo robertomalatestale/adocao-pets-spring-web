@@ -59,7 +59,7 @@ class PetControllerTest {
         Pet pet = new Pet("Rex da Silva", TipoPet.CACHORRO, Sexo.MACHO,15,10.50,"Lhasa Apso");
         pet.setId(1L);
 
-        when(petService.buscarPetPorId(eq(1L))).thenReturn(Optional.of(pet));
+        when(petService.buscarPetPorId(eq(1L))).thenReturn(pet);
 
         mockMvc.perform(get("/api/pets/" + pet.getId())
                 .accept(MediaType.APPLICATION_JSON)

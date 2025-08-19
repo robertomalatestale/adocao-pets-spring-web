@@ -1,6 +1,7 @@
 package com.roberto.adocao_pets_spring_web.service;
 
 import com.roberto.adocao_pets_spring_web.entity.Pet;
+import com.roberto.adocao_pets_spring_web.exceptions.RecursoNaoEncontradoException;
 import com.roberto.adocao_pets_spring_web.repository.PetRepository;
 import org.springframework.stereotype.Service;
 
@@ -20,8 +21,9 @@ public class PetService {
         return petRepository.findAll();
     }
 
-    public Optional<Pet> buscarPetPorId(Long id) {
-        return petRepository.findById(id);
+    public Pet buscarPetPorId(Long id) {
+        return petRepository.findById(id)
+                .orElseThrow(() -> new RecursoNaoEncontradoException("Pet com ID " + id + " não encontrado"));
     }
 
     public Pet salvarPet(Pet pet) {
@@ -29,6 +31,9 @@ public class PetService {
     }
 
     public void deletarPet(Long id) {
+        if(petRepository.existsById(id)) {
+            throw new RecursoNaoEncontradoException("Pet com ID " + id + " não encontrado");
+        }
         petRepository.deleteById(id);
     }
 }

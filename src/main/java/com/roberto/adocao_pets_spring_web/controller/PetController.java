@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/pets")
@@ -24,10 +23,9 @@ public class PetController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Pet> buscarPetPorId(@PathVariable Long id) {
-        Optional<Pet> petOptional = petService.buscarPetPorId(id);
-        return petOptional.map(ResponseEntity::ok)
-                .orElseGet(() -> ResponseEntity.notFound().build());
+    public ResponseEntity<?> buscarPetPorId(@PathVariable Long id) {
+        Pet pet = petService.buscarPetPorId(id);
+        return ResponseEntity.ok(pet);
     }
 
     @PostMapping
