@@ -35,7 +35,7 @@ public class Pet {
     private String urlFoto;
     private boolean adotado;
 
-    public Pet() {
+    protected Pet() {
 
     }
 
