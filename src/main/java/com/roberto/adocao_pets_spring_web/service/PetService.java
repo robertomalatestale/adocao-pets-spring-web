@@ -41,6 +41,10 @@ public class PetService {
         petRepository.deleteById(id);
     }
 
+    public List<Pet> listarPetsSemAdotantes(){
+        return petRepository.findByAdotanteIsNull();
+    }
+
     public Pet adotarPet(Long petId, Long usuarioId) {
         Pet pet = buscarPetPorId(petId);
         if(pet.getAdotante() != null){

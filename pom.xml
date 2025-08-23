@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.roberto</groupId>
 	<artifactId>adocao-pets-spring-web</artifactId>
-	<version>0.1.0</version>
+	<version>0.2.0</version>
 	<name>adocao-pets-spring-web</name>
 	<description>Projeto Spring Boot para adoção de cães e gatos</description>
 	<url/>

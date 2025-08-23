@@ -39,4 +39,10 @@ public class PetController {
         petService.deletarPet(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/disponiveis")
+    public ResponseEntity<List<Pet>> listarPetsDisponiveisParaAdocao() {
+        List<Pet> petsDisponiveisParaAdocao = petService.listarPetsSemAdotantes();
+        return ResponseEntity.ok(petsDisponiveisParaAdocao);
+    }
 }
