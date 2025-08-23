@@ -40,7 +40,7 @@ public class Usuario {
     @Size(min = 8, message = "A senha deve ter no mínimo 8 caracteres")
     private String senha;
 
-    protected Usuario() {
+    public Usuario() {
     }
 
     public Usuario(String cpf, String username, String senha){
