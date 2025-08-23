@@ -34,8 +34,11 @@ public class Pet {
     private String raca;
     private String urlFoto;
     private boolean adotado;
+    @ManyToOne
+    @JoinColumn(name = "adotante_id")
+    private Usuario adotante;
 
-    protected Pet() {
+    public Pet() {
 
     }
 
