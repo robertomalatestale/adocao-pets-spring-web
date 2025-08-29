@@ -28,6 +28,13 @@ public class PetController {
         return ResponseEntity.ok(pet);
     }
 
+    @GetMapping("/search") //EXEMPLO: localhost:8080/api/pets/search?attribute=nomeCompleto&value=Rex
+    public List<Pet> searchPets(
+            @RequestParam String attribute,
+            @RequestParam(required = false) String value) {
+        return petService.buscarPorUmAtributoDefinidoPeloUsuario(attribute, value);
+    }
+
     @PostMapping
     public ResponseEntity<Pet> criarPet(@RequestBody Pet pet) {
         Pet novoPet = petService.salvarPet(pet);

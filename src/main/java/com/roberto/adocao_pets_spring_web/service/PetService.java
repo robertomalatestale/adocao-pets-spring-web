@@ -4,10 +4,10 @@ import com.roberto.adocao_pets_spring_web.entity.Pet;
 import com.roberto.adocao_pets_spring_web.entity.Usuario;
 import com.roberto.adocao_pets_spring_web.exceptions.RecursoNaoEncontradoException;
 import com.roberto.adocao_pets_spring_web.repository.PetRepository;
+import com.roberto.adocao_pets_spring_web.utils.PetSpecification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class PetService {
@@ -23,6 +23,13 @@ public class PetService {
 
     public List<Pet> listarPets() {
         return petRepository.findAll();
+    }
+
+    public List<Pet> buscarPorUmAtributoDefinidoPeloUsuario(String atributo, String valor){
+        if(valor == null || valor.isBlank()){
+            return petRepository.findAll(PetSpecification.hasOnlyAttribute(atributo));
+        }
+        return petRepository.findAll(PetSpecification.hasAttributeAndValue(atributo, valor));
     }
 
     public Pet buscarPetPorId(Long id) {
@@ -47,7 +54,7 @@ public class PetService {
 
     public Pet adotarPet(Long petId, Long usuarioId) {
         Pet pet = buscarPetPorId(petId);
-        if(pet.getAdotante() != null){
+        if (pet.getAdotante() != null) {
             throw new IllegalArgumentException("O pet já está adotado");
         }
         Usuario usuario = usuarioService.buscarUsuarioPorId(usuarioId);
