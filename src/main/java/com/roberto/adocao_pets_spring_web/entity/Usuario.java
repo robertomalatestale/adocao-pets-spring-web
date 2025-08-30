@@ -43,9 +43,10 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(String cpf, String username, String senha){
+    public Usuario(String cpf, String username, String nomeCompleto, String senha){
         setCpf(cpf);
         setUsername(username);
+        setNomeCompleto(nomeCompleto);
         setSenha(senha);
     }
 
